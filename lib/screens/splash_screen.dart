@@ -28,62 +28,53 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Stack(
         children: [
-          // Background
           const DeepSpaceBackground(child: SizedBox.expand()),
-
-          // Rising Bubble Animation
-          // Starts at bottom center, moves to center, fades out
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: 20,
-              height: 20,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.5),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-            )
-            .animate()
-            .moveY(
-              begin: 0, 
-              end: -size.height / 2, // Move up to center (approx)
-              duration: 2.5.seconds,
-              curve: Curves.easeInOut,
-            )
-            .fadeOut(
-              duration: 2.5.seconds,
-              curve: Curves.easeIn,
-            ),
-          ),
-
-          // Title Text
-          // Fades in slowly
           Center(
-            child: Text(
-              'Float',
-              style: GoogleFonts.outfit(
-                fontSize: 48,
-                fontWeight: FontWeight.w100, // Thin
-                letterSpacing: 4.0,
-                color: Colors.white,
-              ),
-            )
-            .animate()
-            .fadeIn(
-              duration: 2.seconds,
-              curve: Curves.easeIn,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
+                  'Float',
+                  style: GoogleFonts.outfit(
+                    fontSize: 48,
+                    color: Colors.white,
+                    letterSpacing: 4,
+                  ),
+                )
+                .animate()
+                .fadeIn(
+                  duration: 2.seconds,
+                  delay: 1.seconds,
+                ),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 15,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                )
+                .animate()
+                .moveY(
+                  begin: 300,
+                  end: 0,
+                  duration: 2.5.seconds,
+                  curve: Curves.easeOut,
+                )
+                .fadeOut(
+                  delay: 2.seconds,
+                  duration: 500.ms, // 500ms
+                ),
+              ],
             ),
           ),
         ],
